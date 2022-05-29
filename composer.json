@@ -1,0 +1,19 @@
+{
+  "name": "adevws/routing",
+  "description": "Gerenciador de rotas baseado no 'simple router'",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alessandro",
+      "email": "alessandro@adev.ws"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "adevws\\Routing\\": "src/"
+    }
+  },
+  "require": {
+  }
+}
