@@ -25,10 +25,8 @@ use adevws\Routing\Route\IGroupRoute;
 use adevws\Routing\Route\ILoadableRoute;
 use adevws\Routing\Route\IPartialGroupRoute;
 use adevws\Routing\Route\IRoute;
-use adevws\Routing\Route\RouteController;
 use adevws\Routing\Route\RouteGroup;
 use adevws\Routing\Route\RoutePartialGroup;
-use adevws\Routing\Route\RouteResource;
 use adevws\Routing\Route\RouteUrl;
 
 class SRouter extends Manager
@@ -184,7 +182,7 @@ class SRouter extends Manager
      * @param string $url
      * @param string|array|Closure $callback
      * @param array|null $settings
-     * @return RouteUrl|IRoute
+     * @return IRoute
      */
     public function put(string $url, $callback, array $settings = null): IRoute
     {
@@ -223,7 +221,7 @@ class SRouter extends Manager
      * @param string $url
      * @param string|array|Closure $callback
      * @param array|null $settings
-     * @return RouteUrl|IRoute
+     * @return IRoute
      */
     public function delete(string $url, $callback, array $settings = null): IRoute
     {
@@ -235,8 +233,7 @@ class SRouter extends Manager
      *
      * @param array $settings
      * @param Closure $callback
-     * @return RouteGroup|IGroupRoute
-     * @throws InvalidArgumentException
+     * @return IGroupRoute
      */
     public function group(array $settings, Closure $callback): IGroupRoute
     {
@@ -256,8 +253,7 @@ class SRouter extends Manager
      * @param string $url
      * @param Closure $callback
      * @param array $settings
-     * @return RoutePartialGroup|IPartialGroupRoute
-     * @throws InvalidArgumentException
+     * @return IPartialGroupRoute
      */
     public function partialGroup(string $url, Closure $callback, array $settings = []): IPartialGroupRoute
     {
@@ -331,49 +327,11 @@ class SRouter extends Manager
      * @param string $url
      * @param string|array|Closure $callback
      * @param array|null $settings
-     * @return RouteUrl|IRoute
+     * @return IRoute
      */
     public function all(string $url, $callback, array $settings = null): IRoute
     {
         $route = new RouteUrl($url, $callback);
-
-        if ($settings !== null) {
-            $route->setSettings($settings);
-        }
-
-        return $this->addRoute($route);
-    }
-
-    /**
-     * This route will route request from the given url to the controller.
-     *
-     * @param string $url
-     * @param string $controller
-     * @param array|null $settings
-     * @return RouteController|IRoute
-     */
-    public function controller(string $url, string $controller, array $settings = null): IRoute
-    {
-        $route = new RouteController($url, $controller);
-
-        if ($settings !== null) {
-            $route->setSettings($settings);
-        }
-
-        return $this->addRoute($route);
-    }
-
-    /**
-     * This type will route all REST-supported requests to different methods in the provided controller.
-     *
-     * @param string $url
-     * @param string $controller
-     * @param array|null $settings
-     * @return RouteResource|IRoute
-     */
-    public function resource(string $url, string $controller, array $settings = null): IRoute
-    {
-        $route = new RouteResource($url, $controller);
 
         if ($settings !== null) {
             $route->setSettings($settings);
